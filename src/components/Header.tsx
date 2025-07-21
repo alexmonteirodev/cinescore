@@ -10,7 +10,7 @@ const Header = () => {
       <div className="flex gap-20 justify-center items-center">
         <h1 className="text-base-100 text-2xl font-bold">CineScore</h1>
         <nav>
-          <ul className="flex gap-6">
+          <ul className="flex gap-6 *:hover:text-base-100">
             <li className="text-base-100">Home</li>
             <li className="text-base-200">Categorias</li>
             <li className="text-base-200">Suas Sérires</li>

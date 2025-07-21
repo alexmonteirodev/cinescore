@@ -1,7 +1,7 @@
 "use client";
 import GET_UPCOMING from "@/actions/upcoming";
+import Image from "next/image";
 import React from "react";
-
 type Films = {
   adult: boolean;
   backdrop_path: string;
@@ -19,7 +19,7 @@ type Films = {
   vote_count: number;
 };
 
-export default function Fetch() {
+const Preview = () => {
   const [upcomingFilms, setUpcomingFilms] = React.useState<Films[]>([]);
 
   React.useEffect(() => {
@@ -27,18 +27,25 @@ export default function Fetch() {
       setUpcomingFilms(data.results || []);
     });
   }, []);
-
   console.log(upcomingFilms);
+
   return (
-    <div>
-      <h1>Filmes Populares</h1>
-      <ul>
+    <div className="overflow-x-auto">
+      <ul className="flex gap-3 pl-3 py-3 w-max border-y border-base-500">
         {upcomingFilms.map((filme) => (
-          <li className="text-base-100" key={filme.id}>
-            {filme.title} — ⭐ {filme.vote_average}
+          <li key={filme.id} className="shrink-0">
+            <Image
+              className="w-[110px] h-[64px] rounded-[8px] object-cover"
+              src={`https://image.tmdb.org/t/p/w500${filme.backdrop_path}`}
+              alt={filme.title}
+              width={500}
+              height={281}
+            />
           </li>
         ))}
       </ul>
     </div>
   );
-}
+};
+
+export default Preview;

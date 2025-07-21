@@ -1,9 +1,10 @@
 import Fetch from "@/components/Fetch";
+import Preview from "@/components/Preview";
 
 export default function Home() {
   return (
     <main>
-      <h1>teste</h1>
+      <Preview />
       <Fetch />
     </main>
   );

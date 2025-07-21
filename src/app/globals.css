@@ -11,3 +11,6 @@
   --color-base-800: rgba(0, 1, 17, 1);
   --color-base-900: rgba(255, 115, 0, 1);
 }
+img {
+  width: "auto";
+}
