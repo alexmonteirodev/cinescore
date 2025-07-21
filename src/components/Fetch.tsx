@@ -2,8 +2,25 @@
 import GET_UPCOMING from "@/actions/upcoming";
 import React from "react";
 
-export default function Teste() {
-  const [upcomingFilms, setUpcomingFilms] = React.useState([]);
+type Films = {
+  adult: false;
+  backdrop_path: string;
+  genre_ids: number[];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+};
+
+export default function Fetch() {
+  const [upcomingFilms, setUpcomingFilms] = React.useState<Films[]>([]);
 
   React.useEffect(() => {
     GET_UPCOMING().then((data) => {

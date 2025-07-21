@@ -1,4 +1,4 @@
-import Fetch from "@/components/fetch";
+import Fetch from "@/components/Fetch";
 
 export default function Home() {
   return (
