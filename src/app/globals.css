@@ -14,3 +14,12 @@
 img {
   width: "auto";
 }
+.hidden-bar {
+  overflow: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer e Edge antigo */
+}
+
+.hidden-bar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari e Opera */
+}

@@ -1,8 +1,8 @@
 "use client";
-import GET_UPCOMING from "@/actions/upcoming";
+import GET_UPCOMING from "@/actions/upcoming-films";
 import React from "react";
 
-type Films = {
+export type Films = {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
@@ -28,7 +28,7 @@ export default function Fetch() {
     });
   }, []);
 
-  console.log(upcomingFilms);
+  console.log("filmes: ", upcomingFilms);
   return (
     <div>
       <h1>Filmes Populares</h1>
