@@ -1,6 +1,7 @@
 import getUpcomingFilms from "@/actions/upcoming-films";
 import getUpcomingSeries from "@/actions/upcoming-series";
 import Banner from "@/components/Banner";
+import Carrosel from "@/components/Carrosel";
 import Fetch from "@/components/Fetch";
 import Preview from "@/components/Preview";
 import React from "react";
@@ -33,8 +34,8 @@ export default async function Home() {
     <main>
       <Preview upcomingFilms={upcomingFilms} />
       <Banner upcomingFilms={upcomingFilms} />
-      <h2 className="text-white">series mais assistidas da semana</h2>
-      <Fetch />
+      <Carrosel carroselTitle={"Séries mais assistidas da semana"} />
+      {/* <Fetch /> */}
     </main>
   );
 }
