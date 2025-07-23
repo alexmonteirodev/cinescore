@@ -23,6 +23,23 @@ export type Films = {
   vote_count: number;
 };
 
+export type Series = {
+  adult: false;
+  backdrop_path: string;
+  first_air_date: string;
+  genre_ids: number[];
+  id: number;
+  name: string;
+  origin_country: string[];
+  original_language: string;
+  original_name: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  vote_average: number;
+  vote_count: number;
+};
+
 export default async function Home() {
   const upcomingFilms = await getUpcomingFilms();
   const upcomingSeries = await getUpcomingSeries();
@@ -34,7 +51,14 @@ export default async function Home() {
     <main>
       <Preview upcomingFilms={upcomingFilms} />
       <Banner upcomingFilms={upcomingFilms} />
-      <Carrosel carroselTitle={"Séries mais assistidas da semana"} />
+      <Carrosel
+        carroselTitle={"Séries mais assistidas da semana"}
+        carroselPictures={upcomingSeries}
+      />
+      <Carrosel
+        carroselTitle={"Séries mais assistidas da semana"}
+        carroselPictures={upcomingSeries}
+      />
       {/* <Fetch /> */}
     </main>
   );

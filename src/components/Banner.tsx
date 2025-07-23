@@ -68,7 +68,7 @@ const Banner = ({ upcomingFilms }: { upcomingFilms: Films[] }) => {
         ))}
       </ul>
       <button
-        className="h-10 w-10 bg-base-100 rounded-full flex items-center justify-center fixed top-[467px] left-[85%] cursor-pointer"
+        className="h-10 w-10 bg-base-100 rounded-full flex items-center justify-center absolute top-[50%] left-[85%] cursor-pointer"
         onClick={next}
       >
         <Image src={chevronBlack} alt=">" />
