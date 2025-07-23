@@ -6,6 +6,37 @@ import chevron from "../../public/chevron.svg";
 import chevronBlack from "../../public/chevro-black.svg";
 import star from "../../public/star.svg";
 
+const genreMap: Record<number, string> = {
+  28: "Ação",
+  12: "Aventura",
+  16: "Animação",
+  35: "Comédia",
+  80: "Crime",
+  99: "Documentário",
+  18: "Drama",
+  10751: "Família",
+  14: "Fantasia",
+  36: "História",
+  27: "Terror",
+  10402: "Música",
+  9648: "Mistério",
+  10749: "Romance",
+  878: "Ficção Científica",
+  10770: "Cinema TV",
+  53: "Thriller",
+  10752: "Guerra",
+  37: "Faroeste",
+  // Gêneros específicos para séries de TV:
+  10759: "Ação & Aventura (TV)",
+  10762: "Crianças (TV)",
+  10763: "Notícias (TV)",
+  10764: "Reality (TV)",
+  10765: "Sci-Fi & Fantasia (TV)",
+  10766: "Soap (TV)",
+  10767: "Talk (TV)",
+  10768: "Guerra & Política (TV)",
+};
+
 const Banner = ({ upcomingFilms }: { upcomingFilms: Films[] }) => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
 
@@ -22,6 +53,15 @@ const Banner = ({ upcomingFilms }: { upcomingFilms: Films[] }) => {
 
     return () => clearInterval(interval);
   }, [currentIndex]);
+
+  function formatRuntime(runtime: number): string {
+    if (!runtime || runtime <= 0) return "Tempo desconhecido";
+
+    const hours = Math.floor(runtime / 60);
+    const minutes = runtime % 60;
+
+    return `${hours}h · ${minutes}min`;
+  }
 
   return (
     <div className="relative overflow-hidden w-full h-[75vh]">
@@ -51,8 +91,8 @@ const Banner = ({ upcomingFilms }: { upcomingFilms: Films[] }) => {
                   <Image src={star} alt=">" />
                   <p>{filme.vote_average.toFixed(1)}</p>
                 </div>
-                <div>Drama</div>
-                <div>Filme</div>
+                <div>{genreMap[filme.genre_ids[0]] ?? "Desconhecido"}</div>
+                <div>{formatRuntime(filme.runtime)}</div>
               </div>
               <div className="flex gap-3">
                 <button className="text-base-800 bg-base-100 px-3 py-2 rounded-[100px] hover:cursor-pointer">

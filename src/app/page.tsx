@@ -1,8 +1,8 @@
+import getPopulares from "@/actions/populares";
 import getUpcomingFilms from "@/actions/upcoming-films";
 import getUpcomingSeries from "@/actions/upcoming-series";
 import Banner from "@/components/Banner";
 import Carrosel from "@/components/Carrosel";
-import Fetch from "@/components/Fetch";
 import Preview from "@/components/Preview";
 import React from "react";
 
@@ -21,6 +21,7 @@ export type Films = {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  runtime: number;
 };
 
 export type Series = {
@@ -43,9 +44,11 @@ export type Series = {
 export default async function Home() {
   const upcomingFilms = await getUpcomingFilms();
   const upcomingSeries = await getUpcomingSeries();
+  const populares = await getPopulares();
 
   console.log("filmes: ", upcomingFilms);
   console.log("Series: ", upcomingSeries);
+  console.log("populares: ", populares);
 
   return (
     <main>
@@ -56,10 +59,9 @@ export default async function Home() {
         carroselPictures={upcomingSeries}
       />
       <Carrosel
-        carroselTitle={"Séries mais assistidas da semana"}
+        carroselTitle={"Mais populares"}
         carroselPictures={upcomingSeries}
       />
-      {/* <Fetch /> */}
     </main>
   );
 }

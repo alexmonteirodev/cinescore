@@ -15,8 +15,36 @@ export default async function getUpcomingFilms() {
     );
 
     const data = await r.json();
-    return data.results || [];
+    const films = data.results || [];
+
+    // Para cada filme, buscar o runtime separadamente
+    const filmsWithRuntime = await Promise.all(
+      films.map(async (film: any) => {
+        try {
+          const res = await fetch(
+            `https://api.themoviedb.org/3/movie/${film.id}`,
+            {
+              headers: {
+                accept: "application/json",
+                Authorization: "Bearer " + API_KEY,
+              },
+              next: { revalidate: 3600 },
+            }
+          );
+          const details = await res.json();
+          return { ...film, runtime: details.runtime || null };
+        } catch {
+          return { ...film, runtime: null };
+        }
+      })
+    );
+
+    return filmsWithRuntime;
   } catch (err) {
     console.error("Erro ao buscar filmes:", err);
+    return [];
   }
 }
+
+// const runtime = await runTimeFilm(1087192);
+// console.log("runtime", runtime);
