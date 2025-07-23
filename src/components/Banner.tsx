@@ -39,6 +39,7 @@ const genreMap: Record<number, string> = {
 
 const Banner = ({ upcomingFilms }: { upcomingFilms: Films[] }) => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [slideTransition, setSlideTransition] = React.useState(false);
 
   const next = () => {
     setCurrentIndex((prev) =>
@@ -46,12 +47,27 @@ const Banner = ({ upcomingFilms }: { upcomingFilms: Films[] }) => {
     );
   };
 
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      next();
-    }, 10000);
+  // React.useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     next();
+  //   }, 5000);
 
-    return () => clearInterval(interval);
+  //   return () => clearInterval(interval);
+  // }, [currentIndex]);
+  React.useEffect(() => {
+    const transitionTimeout = setTimeout(() => {
+      setSlideTransition(true); // Começa animação 200ms antes
+    }, 4800);
+
+    const changeTimeout = setTimeout(() => {
+      next(); // Troca imagem
+      setTimeout(() => setSlideTransition(false), 300); // Espera transição acabar antes de resetar
+    }, 5000);
+
+    return () => {
+      clearTimeout(transitionTimeout);
+      clearTimeout(changeTimeout);
+    };
   }, [currentIndex]);
 
   function formatRuntime(runtime: number): string {
@@ -62,6 +78,20 @@ const Banner = ({ upcomingFilms }: { upcomingFilms: Films[] }) => {
 
     return `${hours}h · ${minutes}min`;
   }
+  const nextIndex =
+    currentIndex >= upcomingFilms.length - 1 ? 0 : currentIndex + 1;
+
+  const nextFilm = upcomingFilms[nextIndex];
+
+  // React.useEffect(() => {
+  //   setSlideTransition(true);
+
+  //   const timeout = setTimeout(() => {
+  //     setSlideTransition(false);
+  //   }, 200);
+
+  //   return () => clearTimeout(timeout);
+  // }, [currentIndex]);
 
   return (
     <div className="relative overflow-hidden w-full h-[75vh]">
@@ -92,10 +122,10 @@ const Banner = ({ upcomingFilms }: { upcomingFilms: Films[] }) => {
                   <p>{filme.vote_average.toFixed(1)}</p>
                 </div>
                 <div>{genreMap[filme.genre_ids[0]] ?? "Desconhecido"}</div>
-                <div>{formatRuntime(filme.runtime)}</div>
+                <div>{formatRuntime(filme.runtime ?? 0)}</div>
               </div>
               <div className="flex gap-3">
-                <button className="text-base-800 bg-base-100 px-3 py-2 rounded-[100px] hover:cursor-pointer">
+                <button className="text-base-800 bg-base-100 px-3 py-2 rounded-[100px] hover:cursor-pointer font-bold">
                   + Adicionar a sua lista
                 </button>
                 <button className="text-base-100 bg-base-600 px-3 py-2 rounded-[100px] hover:cursor-pointer flex items-center gap-2">
@@ -113,6 +143,21 @@ const Banner = ({ upcomingFilms }: { upcomingFilms: Films[] }) => {
       >
         <Image src={chevronBlack} alt=">" />
       </button>
+      <Image
+        src={`https://image.tmdb.org/t/p/w1280${nextFilm.backdrop_path}`}
+        alt={nextFilm.title}
+        width={1440}
+        height={734}
+        className={`h-[400px] w-[120px] rounded-l-[12px] absolute bottom-1/2 translate-y-1/2 object-cover right-0 transition-all duration-700 ease-in-out shadow-2xl shadow-base-800
+    ${slideTransition ? "" : ""}
+    
+  `}
+        style={{
+          transform: slideTransition ? "scale(1.4)" : "scale(1)",
+          opacity: slideTransition ? 0 : 1,
+        }}
+        priority
+      />
     </div>
   );
 };

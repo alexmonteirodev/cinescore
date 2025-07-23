@@ -28,16 +28,16 @@ const Carrosel = ({ carroselTitle, carroselPictures }: Carrosel) => {
                 <Image
                   className="w-[302px] h-[170px] rounded-[8px] object-cover border border-base-600 cursor-pointer"
                   src={`https://image.tmdb.org/t/p/w500${filme.backdrop_path}`}
-                  alt={filme.name}
+                  alt="img"
                   width={500}
                   height={281}
-                  title={filme.name}
+                  title={filme.name || filme.title}
                 />
                 <div className="bg-base-100 rounded-[6px] items-center gap-1 inline-flex px-2 py-1 absolute bottom-2 left-2">
                   <span>
                     <Image src={play} alt="play.svg" />
                   </span>
-                  <p>{filme.popularity}</p>
+                  <p>{filme.popularity.toFixed(3)}</p>
                 </div>
               </li>
             ))}

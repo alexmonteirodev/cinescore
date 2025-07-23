@@ -3,7 +3,7 @@ import { API_KEY } from "@/api/options";
 export default async function getPopulares() {
   try {
     const r = await fetch(
-      "https://api.themoviedb.org/3/person/popular?language=en-US&page=1",
+      "https://api.themoviedb.org/3/trending/all/day?language=en-US",
       {
         method: "GET",
         headers: {

@@ -3,6 +3,7 @@ import getUpcomingFilms from "@/actions/upcoming-films";
 import getUpcomingSeries from "@/actions/upcoming-series";
 import Banner from "@/components/Banner";
 import Carrosel from "@/components/Carrosel";
+import Footer from "@/components/Footer";
 import Preview from "@/components/Preview";
 import React from "react";
 
@@ -21,7 +22,7 @@ export type Films = {
   video: boolean;
   vote_average: number;
   vote_count: number;
-  runtime: number;
+  runtime?: number;
 };
 
 export type Series = {
@@ -39,6 +40,7 @@ export type Series = {
   poster_path: string;
   vote_average: number;
   vote_count: number;
+  title?: string;
 };
 
 export default async function Home() {
@@ -59,9 +61,11 @@ export default async function Home() {
         carroselPictures={upcomingSeries}
       />
       <Carrosel
-        carroselTitle={"Mais populares"}
-        carroselPictures={upcomingSeries}
+        carroselTitle={"Tendências recentes"}
+        carroselPictures={populares}
       />
+      <hr className="text-base-500 my-20" />
+      <Footer />
     </main>
   );
 }
