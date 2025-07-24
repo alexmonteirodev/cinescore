@@ -48,9 +48,9 @@ export default async function Home() {
   const upcomingSeries = await getUpcomingSeries();
   const populares = await getPopulares();
 
-  console.log("filmes: ", upcomingFilms);
-  console.log("Series: ", upcomingSeries);
-  console.log("populares: ", populares);
+  // console.log("filmes: ", upcomingFilms);
+  // console.log("Series: ", upcomingSeries);
+  // console.log("populares: ", populares);
 
   return (
     <main>

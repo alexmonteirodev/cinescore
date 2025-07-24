@@ -1,4 +1,5 @@
 import { API_KEY } from "@/api/options";
+import { Films } from "@/app/page";
 
 export default async function getUpcomingFilms() {
   try {
@@ -17,9 +18,8 @@ export default async function getUpcomingFilms() {
     const data = await r.json();
     const films = data.results || [];
 
-    // Para cada filme, buscar o runtime separadamente
     const filmsWithRuntime = await Promise.all(
-      films.map(async (film: any) => {
+      films.map(async (film: Films) => {
         try {
           const res = await fetch(
             `https://api.themoviedb.org/3/movie/${film.id}`,

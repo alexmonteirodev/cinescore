@@ -2,11 +2,3 @@ export const BASE_URL = "https://api.themoviedb.org/3";
 
 export const API_KEY =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3Zjc4ODgyNTJjMTEwNGE0M2NmNjA2NmUzYjNiYzQ4ZiIsIm5iZiI6MTc1MzEwODk0My41MjksInN1YiI6IjY4N2U1MWNmODdiOTgxMjc5YzU1ZDIxZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.hvunhZEGRSCIQDdwQTmERY10k1iCmwOSxo3xKyIgwqY";
-
-const GET_UPCOMING = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization: "Bearer " + API_KEY,
-  },
-};
