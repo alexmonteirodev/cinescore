@@ -68,7 +68,7 @@ const Banner = ({ upcomingFilms }: { upcomingFilms: Films[] }) => {
       clearTimeout(transitionTimeout);
       clearTimeout(changeTimeout);
     };
-  }, [currentIndex, next]);
+  }, [currentIndex]);
 
   function formatRuntime(runtime: number): string {
     if (!runtime || runtime <= 0) return "Tempo desconhecido";
